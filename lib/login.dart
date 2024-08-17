@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'package:logging/logging.dart';
+import 'package:http/http.dart' as http;
+import 'config/constants.dart';
+import 'dart:convert';
 
 final _logger = Logger('login');
 
@@ -14,8 +17,48 @@ class LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  // 定义登录请求的函数
+  Future<void> userLogin(String email, String password) async {
+    final url = Uri.parse('$baseUrl/login'); // 替换为你的后端服务地址
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // 请求成功
+      _logger.info('登录成功: ${response.body}');
+    } else {
+      // 请求失败
+      _logger.severe('登录失败: ${response.statusCode}');
+    }
+  }
+
   void _login() {
-    _logger.info("clicked login button");
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    userLogin(email, password).then((_) {
+      // 登录成功后，跳转到首页或显示成功消息
+      if (mounted) {
+        // Navigator.pop(context);
+      }
+    }).catchError((error) {
+      // 处理错误
+      _logger.severe('登录请求失败: $error');
+      if (mounted) {
+        // 你可以在这里显示错误消息
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('登录请求失败: $error')),
+        );
+      }
+    });
   }
 
   void _reset() {
