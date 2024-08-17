@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
-import 'config/constants.dart';
+import '../config/constants.dart';
 
 final _logger = Logger('register');
 

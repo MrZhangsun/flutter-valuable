@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'login.dart';
+import 'features/login.dart';
 
 const appName = 'Valuable App';
+final _logger = Logger('main');
 
 void main() {
   // 设定日志级别
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
+    _logger.info('${record.level.name}: ${record.time}: ${record.message}');
   });
   runApp(const ValuableApp());
 }

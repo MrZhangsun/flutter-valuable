@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'register.dart';
 import 'package:logging/logging.dart';
 import 'package:http/http.dart' as http;
-import 'config/constants.dart';
+import '../config/constants.dart';
 import 'dart:convert';
+import 'dashborad.dart';
 
 final _logger = Logger('login');
 
@@ -48,6 +49,11 @@ class LoginPageState extends State<LoginPage> {
       // 登录成功后，跳转到首页或显示成功消息
       if (mounted) {
         // Navigator.pop(context);
+        // 登录成功，跳转到仪表盘页面
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Dashboard()),
+        );
       }
     }).catchError((error) {
       // 处理错误
