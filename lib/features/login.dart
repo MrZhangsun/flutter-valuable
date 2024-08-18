@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
-import 'package:logging/logging.dart';
+import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
-import '../config/constants.dart';
+import '../services/constants.dart';
 import 'dart:convert';
 import 'dashborad.dart';
+import '../services/database.dart';
 
-final _logger = Logger('login');
+final _db = AppDatabase();
+
+final _logger = Logger();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -35,10 +38,19 @@ class LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 200) {
       // 请求成功
-      _logger.info('登录成功: ${response.body}');
+      final result = jsonDecode(response.body);
+      final token = Token(
+          id: result['id'] as int,
+          name: result['name'] as String,
+          nickName: result['nickName'] as String,
+          email: result['email'] as String,
+          token: result['token'] as String,
+          loginTime: DateTime.parse(result['loginTime'] as String));
+      _db.insertToken(token);
+      _logger.i('登录成功: ${response.body}');
     } else {
       // 请求失败
-      _logger.severe('登录失败: ${response.statusCode}');
+      _logger.i('登录失败: ${response.statusCode}');
     }
   }
 
@@ -48,7 +60,6 @@ class LoginPageState extends State<LoginPage> {
     userLogin(email, password).then((_) {
       // 登录成功后，跳转到首页或显示成功消息
       if (mounted) {
-        // Navigator.pop(context);
         // 登录成功，跳转到仪表盘页面
         Navigator.pushReplacement(
           context,
@@ -57,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
       }
     }).catchError((error) {
       // 处理错误
-      _logger.severe('登录请求失败: $error');
+      _logger.e('登录请求失败: $error');
       if (mounted) {
         // 你可以在这里显示错误消息
         ScaffoldMessenger.of(context).showSnackBar(
@@ -68,7 +79,7 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void _reset() {
-    _logger.info("clicked reset button");
+    _logger.i("clicked reset button");
   }
 
   @override

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:logging/logging.dart';
-import '../config/constants.dart';
+import 'package:logger/logger.dart';
+import '../services/constants.dart';
 
-final _logger = Logger('register');
+final _logger = Logger();
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -38,10 +38,10 @@ class RegisterPageState extends State<RegisterPage> {
 
     if (response.statusCode == 200) {
       // 请求成功
-      _logger.info('注册成功: ${response.body}');
+      _logger.i('注册成功: ${response.body}');
     } else {
       // 请求失败
-      _logger.severe('注册失败: ${response.statusCode}');
+      _logger.e('注册失败: ${response.statusCode}');
     }
   }
 
@@ -59,7 +59,7 @@ class RegisterPageState extends State<RegisterPage> {
         }
       }).catchError((error) {
         // 处理错误
-        _logger.severe('注册请求失败: $error');
+        _logger.e('注册请求失败: $error');
         if (mounted) {
           // 你可以在这里显示错误消息
           ScaffoldMessenger.of(context).showSnackBar(
@@ -69,7 +69,7 @@ class RegisterPageState extends State<RegisterPage> {
       });
     } else {
       // 密码不匹配的处理
-      _logger.severe('密码不匹配');
+      _logger.e('密码不匹配');
       if (mounted) {
         // 显示密码不匹配的消息
         ScaffoldMessenger.of(context).showSnackBar(
