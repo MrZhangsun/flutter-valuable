@@ -11,14 +11,8 @@ class StartBusinssPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("新建"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                _logger.i("app bar back...");
-              },
-              icon: const Icon(Icons.search))
-        ],
       ),
+      body: Text("data"),
     );
   }
 }

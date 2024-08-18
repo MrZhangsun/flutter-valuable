@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:valuable/features/home.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -24,7 +25,8 @@ class _ProfileState extends State<Profile> {
             title: const Text('账户'),
             onTap: () {
               // 处理主页点击事件
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
             },
           ),
           ListTile(

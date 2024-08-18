@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:valuable/features/dashborad.dart';
+import 'package:valuable/features/list.dart';
 import 'package:valuable/features/start.dart';
 import 'profile.dart';
 import '../services/constants.dart';
@@ -42,9 +42,9 @@ class _HomePageState extends State<HomePage> {
         MaterialPageRoute(builder: (context) => const StartBusinssPage()));
   }
 
-  void _push2ListPage(String filterKey) {
+  void _push2ListPage(String name) {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Dashboard(filter: filterKey)));
+        MaterialPageRoute(builder: (context) => Dashboard(name: name)));
   }
 
   @override
@@ -54,22 +54,26 @@ class _HomePageState extends State<HomePage> {
           title: const Text(
             'Valuable Your Business!',
             style: TextStyle(
-                fontSize: 18.0,
-                color: Color.fromARGB(201, 30, 30, 28),
-                fontWeight: FontWeight.bold),
+                fontSize: 18.0, color: fontColor, fontWeight: FontWeight.bold),
           ),
           titleSpacing: 2.0,
+          iconTheme: const IconThemeData(color: fontColor),
           actions: [
             IconButton(
-                onPressed: () {
-                  _logger.i("app bar search...");
-                },
-                icon: const Icon(Icons.search)),
+              onPressed: () {
+                _logger.i("app bar search...");
+              },
+              icon: const Icon(Icons.search),
+              color: fontColor,
+            ),
             IconButton(
                 onPressed: () {
                   _logger.i("app bar more...");
                 },
-                icon: const Icon(Icons.notifications))
+                icon: const Icon(
+                  Icons.notifications,
+                  color: fontColor,
+                ))
           ],
           backgroundColor: themeColor,
         ),
@@ -107,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       onTap: () {
-                        _push2ListPage(categories[index]['filter']);
+                        _push2ListPage(categories[index]['name']);
                       },
                     );
                   },
@@ -115,15 +119,18 @@ class _HomePageState extends State<HomePage> {
               ),
               TextButton(
                   onPressed: _push2NewPage,
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.add,
+                        IconFont.creation,
                         color: themeColor,
-                        size: 25,
+                        size: 22,
                       ),
-                      Text('新建项目',
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      const Text('新建项目',
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

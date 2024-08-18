@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:valuable/features/home.dart';
 import 'register.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 import '../services/constants.dart';
 import 'dart:convert';
-import 'dashborad.dart';
 import '../services/database.dart';
 
 final _db = AppDatabase();
@@ -63,7 +63,7 @@ class LoginPageState extends State<LoginPage> {
         // 登录成功，跳转到仪表盘页面
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const Dashboard()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       }
     }).catchError((error) {
