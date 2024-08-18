@@ -12,7 +12,7 @@ class StartBusinssPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("新建"),
       ),
-      body: Text("data"),
+      body: const Text("data"),
     );
   }
 }

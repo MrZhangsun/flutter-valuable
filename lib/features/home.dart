@@ -54,17 +54,19 @@ class _HomePageState extends State<HomePage> {
           title: const Text(
             'Valuable Your Business!',
             style: TextStyle(
-                fontSize: 18.0, color: fontColor, fontWeight: FontWeight.bold),
+                fontSize: 18.0,
+                color: AppColors.textColor,
+                fontWeight: FontWeight.bold),
           ),
           titleSpacing: 2.0,
-          iconTheme: const IconThemeData(color: fontColor),
+          iconTheme: const IconThemeData(color: AppColors.iconColor),
           actions: [
             IconButton(
               onPressed: () {
                 _logger.i("app bar search...");
               },
               icon: const Icon(Icons.search),
-              color: fontColor,
+              color: AppColors.accentColor,
             ),
             IconButton(
                 onPressed: () {
@@ -72,10 +74,10 @@ class _HomePageState extends State<HomePage> {
                 },
                 icon: const Icon(
                   Icons.notifications,
-                  color: fontColor,
+                  color: AppColors.iconColor,
                 ))
           ],
-          backgroundColor: themeColor,
+          backgroundColor: AppColors.primaryColor,
         ),
         drawer: const Profile(),
         body: Padding(
@@ -93,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                     return ListTile(
                       leading: Icon(
                         categories[index]['icon'],
-                        color: themeColor,
+                        color: AppColors.iconColor,
                       ),
                       title: Text(categories[index]['name']),
                       trailing: Row(
@@ -124,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Icon(
                         IconFont.creation,
-                        color: themeColor,
+                        color: AppColors.iconColor,
                         size: 22,
                       ),
                       const SizedBox(
@@ -134,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: themeColor))
+                              color: AppColors.iconColor))
                     ],
                   ))
             ],

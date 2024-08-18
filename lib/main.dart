@@ -22,9 +22,9 @@ class ValuableApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const HomePage(),
-      routes: {
-        '/start': (context) => StartBusinssPage(),
-      },
+      // routes: {
+      //   '/start': (context) => const StartBusinssPage(),
+      // },
       debugShowCheckedModeBanner: false,
     );
   }
