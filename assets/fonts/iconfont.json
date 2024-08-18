@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5337145",
+      "name": "address_edit",
+      "font_class": "address_edit",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    }
+  ]
+}
