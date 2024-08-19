@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import '../services/constants.dart';
+import 'create_dialog.dart';
 
 final _logger = Logger();
 
@@ -22,6 +23,7 @@ class Dashboard extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                showProjectCreateDialog(context);
                 _logger.i("app bar search...");
               },
               icon: Icon(
@@ -38,6 +40,31 @@ class Dashboard extends StatelessWidget {
               ))
         ],
       ),
+      body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Center(
+                child: Container(
+                  width: 900,
+                  height: 40, // 设置搜索框的宽度
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0), // 设置圆角
+                    border: Border.all(color: Colors.grey, width: 1), // 设置边框
+                  ),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search), // 搜索图标
+                      hintText: 'Search', // 提示文本
+                      border: InputBorder.none, // 移除默认边框
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 16.0), // 设置内边距
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

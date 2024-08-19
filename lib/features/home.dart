@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:valuable/features/list.dart';
-import 'package:valuable/features/start.dart';
 import 'profile.dart';
 import '../services/constants.dart';
+import 'create_dialog.dart';
 
 final _logger = Logger();
 
@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-  void _push2NewPage() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const StartBusinssPage()));
-  }
+  // void _push2NewPage() {
+  //   Navigator.push(context,
+  //       MaterialPageRoute(builder: (context) => const StartBusinssPage()));
+  // }
 
   void _push2ListPage(String name) {
     Navigator.push(context,
@@ -120,7 +120,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               TextButton(
-                  onPressed: _push2NewPage,
+                  onPressed: () {
+                    showProjectCreateDialog(context);
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

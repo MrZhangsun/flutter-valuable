@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-
-final _logger = Logger();
 
 class StartBusinssPage extends StatelessWidget {
-  const StartBusinssPage({super.key});
+  final String projectName;
+  const StartBusinssPage({Key? key, required this.projectName})
+      : super(key: key);
 
   @override
   Widget build(Object context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("新建"),
+        title: Text(projectName),
       ),
       body: const Text("data"),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'features/home.dart';
-import 'features/start.dart';
 
 const appName = 'Valuable App';
 
@@ -22,9 +21,6 @@ class ValuableApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const HomePage(),
-      // routes: {
-      //   '/start': (context) => const StartBusinssPage(),
-      // },
       debugShowCheckedModeBanner: false,
     );
   }
