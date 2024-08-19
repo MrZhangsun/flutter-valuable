@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             'Valuable Your Business!',
             style: TextStyle(
                 fontSize: 18.0,
-                color: AppColors.textColor,
+                color: AppColors.textHead1Color,
                 fontWeight: FontWeight.bold),
           ),
           titleSpacing: 2.0,

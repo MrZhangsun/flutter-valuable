@@ -8,26 +8,27 @@ void showProjectCreateDialog(BuildContext context) {
       // 防止点击对话框外部的空白区域时被关闭
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String projectName = "New";
+        String projectName = "新建项目";
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0), // 设置圆角
           ),
           title: const Center(
-            child: Text('New'),
+            child: Text('新建项目'),
           ),
           titleTextStyle:
-              const TextStyle(fontSize: 18, color: AppColors.textColor),
+              const TextStyle(fontSize: 18, color: AppColors.textContentColor),
           content: TextField(
             onChanged: (value) {
               projectName = value;
             },
+            style: const TextStyle(height: 2),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 IconFont.creation,
                 color: AppColors.iconColor,
               ),
-              hintText: 'Input Project Name',
+              hintText: '请输入项目名称',
               border: const UnderlineInputBorder(
                   borderSide: BorderSide(width: 0.5, color: Colors.black12)),
             ),

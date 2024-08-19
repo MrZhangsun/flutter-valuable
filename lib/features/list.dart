@@ -54,8 +54,11 @@ class Dashboard extends StatelessWidget {
                   ),
                   child: const TextField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search), // 搜索图标
-                      hintText: 'Search', // 提示文本
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: AppColors.iconColor,
+                      ), // 搜索图标
+                      hintText: '搜索', // 提示文本
                       border: InputBorder.none, // 移除默认边框
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 16.0), // 设置内边距
