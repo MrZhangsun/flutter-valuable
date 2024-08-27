@@ -4,9 +4,6 @@ import 'package:logger/logger.dart';
 
 final _logger = Logger();
 
-void main() {
-  runApp(const MaterialApp(home: NumericKeypad()));
-}
 
 class NumericKeypad extends StatefulWidget {
   const NumericKeypad({super.key});
@@ -16,11 +13,13 @@ class NumericKeypad extends StatefulWidget {
 }
 
 class _NumericKeypadState extends State<NumericKeypad> {
+  
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _remarkController = TextEditingController();
 
   static const String ok = 'OK';
   static const String clear = 'CE';
+
   int? _value = 1;
 
   final List<CostCategory> _categories = [
@@ -79,23 +78,22 @@ class _NumericKeypadState extends State<NumericKeypad> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('Numeric Keypad')),
-        body: Padding(
-            padding: const EdgeInsets.all(10),
+    return Center(child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Expanded(flex: 5, child: Text("data")),
-                const Expanded(
+                Expanded(
                     flex: 1,
                     child: Align(
                         alignment: Alignment.bottomLeft,
-                        child: Icon(Icons.close))),
+                        child: IconButton(onPressed: (){
+                          Navigator.of(context).pop();
+                        }, icon: const Icon(Icons.close)))),
                 const Expanded(
                   flex: 1,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                           flex: 5,
@@ -154,55 +152,43 @@ class _NumericKeypadState extends State<NumericKeypad> {
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: TextField(
-                        controller: _remarkController,
-                        decoration: const InputDecoration(
-                            labelText: '备注', border: OutlineInputBorder()),
-                        enabled: true,
-                      ),
+                      child: _buildNoteButton(),
                     )),
-                Expanded(
-                    flex: 6,
+                SizedBox(
+                    height: 284,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
-                            flex: 3,
+                            flex: 5,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    _buildButton('1', 1, 55, 60),
-                                    _buildButton('2', 1, 55, 60),
-                                    _buildButton('3', 1, 55, 60),
+                                    _buildButton('1', 1, 65, 90),
+                                    _buildButton('2', 1, 65, 90),
+                                    _buildButton('3', 1, 65, 90),
                                   ],
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    _buildButton('4', 1, 55, 90),
-                                    _buildButton('5', 1, 55, 90),
-                                    _buildButton('6', 1, 55, 90),
+                                    _buildButton('4', 1, 65, 90),
+                                    _buildButton('5', 1, 65, 90),
+                                    _buildButton('6', 1, 65, 90),
                                   ],
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    _buildButton('7', 1, 55, 90),
-                                    _buildButton('8', 1, 55, 90),
-                                    _buildButton('9', 1, 55, 90),
+                                    _buildButton('7', 1, 65, 90),
+                                    _buildButton('8', 1, 65, 90),
+                                    _buildButton('9', 1, 65, 90),
                                   ],
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    _buildButton('0', 2, 55, 90),
-                                    _buildButton('.', 1, 55, 90),
+                                    _buildButton('0', 2, 65, 90),
+                                    _buildButton('.', 1, 65, 90),
                                   ],
                                 )
                               ],
@@ -211,14 +197,56 @@ class _NumericKeypadState extends State<NumericKeypad> {
                             flex: 1,
                             child: Column(
                               children: [
-                                _buildButton(clear, 1, 55, 90),
-                                _buildButton(ok, 2, 55, 90),
+                                _buildButton(clear, 1, 55, 100),
+                                _buildButton(ok, 2, 55, 100),
                               ],
                             ))
                       ],
-                    )),
+                    ))
               ],
-            )));
+            )),);
+  }
+
+  Widget _buildNoteButton() {
+      _logger.i("添加备注");
+    if(_remarkController.text.isEmpty) {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+            TextButton(onPressed: (){
+              _showAddNoteDialog();
+              }, 
+              child: const Align(alignment: Alignment.bottomLeft, 
+                child: Text("添加备注", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),)),
+            Text(_remarkController.text, style: const TextStyle(fontSize: 16)),
+          ],);
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+      Text(_remarkController.text, style: const TextStyle(fontSize: 16)),
+      TextButton(onPressed: (){
+            _showAddNoteDialog();
+          }, child: const Align(alignment: Alignment.bottomLeft, 
+          child: Text("修改", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),)),
+    ],);
+  }
+
+  void _showAddNoteDialog() {
+    showDialog(context: context, builder: (context) {
+        return AlertDialog(content: TextField(
+          controller: _remarkController,
+        ), title: const Text("请输入备注:"),
+        actions: [
+          TextButton(onPressed: () {
+            Navigator.of(context).pop();
+            setState(() {
+              _remarkController.text = _remarkController.text;
+            });
+          }, child: const Text("保存"))
+        ],);
+    });
   }
 
   Widget _buildCostCategoryList(CostCategory item) {
@@ -248,7 +276,7 @@ class _NumericKeypadState extends State<NumericKeypad> {
     return Expanded(
         flex: flex,
         child: Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(3),
           child: SizedBox(
             width: width,
             height: height,

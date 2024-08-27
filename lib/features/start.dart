@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:intl/intl.dart';
 import 'package:valuable/services/constants.dart';
+import 'keyboard.dart';
 
 final _logger = Logger();
 
@@ -239,6 +240,7 @@ class _CreateBusinssPageState extends State<CreateBusinssPage> {
   void _change() {}
   // Add a new cost item
   void _showAddItemBottomSheet() {
+
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -247,81 +249,14 @@ class _CreateBusinssPageState extends State<CreateBusinssPage> {
 
         _logger.i("屏幕宽度: $width, 高度: $height");
         return SizedBox(
-          height: height,
-          width: width,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: SizedBox(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text("支出"),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text("收入"),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text("不计入收支"),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text("时间"),
-                              ),
-                            ],
-                          )),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    IconFont.rmb,
-                                    color: AppColors.iconColor,
-                                  ), // 搜索图标
-                                  border: InputBorder.none, // 移除默认边框
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0), // 设置内边距
-                                ),
-                                onChanged: (value) {},
-                              ))
-                        ],
-                      ),
-                      Text("1"),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text("Row1"),
-              ),
-              Expanded(
-                flex: 2,
-                child: Text("Row1"),
-              ),
-            ],
-          ),
+          height: height * 0.8,
+          width: double.infinity,
+          child: const NumericKeypad(),
         );
       },
 
-      isDismissible: true,
-      // shape: RoundedRectangleBorder()
-      // shape: const RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-      // backgroundColor: const Color.fromARGB(0, 223, 36, 208)
+      isDismissible: false,
+      isScrollControlled: true, 
     );
     setState(() {
       // _costs.add(CostItem());
