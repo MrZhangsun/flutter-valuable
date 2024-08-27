@@ -17,7 +17,7 @@ class ValuableApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 153, 138, 180)),
         useMaterial3: true,
       ),
       home: const HomePage(),

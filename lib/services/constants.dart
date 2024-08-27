@@ -5,6 +5,8 @@ const String baseUrl = 'http://127.0.0.1:8080';
 class IconFont {
   static IconData creation =
       const IconData(0xe691, matchTextDirection: true, fontFamily: "iconfont");
+  static IconData rmb =
+      const IconData(0xe7d8, matchTextDirection: true, fontFamily: "iconfont");
 }
 
 class AppColors {

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "587072",
+      "name": "rmb",
+      "font_class": "rmb",
+      "unicode": "e7d8",
+      "unicode_decimal": 59352
+    },
+    {
       "icon_id": "5337145",
       "name": "address_edit",
       "font_class": "address_edit",

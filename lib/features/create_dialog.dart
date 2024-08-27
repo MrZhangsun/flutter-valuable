@@ -8,7 +8,7 @@ void showProjectCreateDialog(BuildContext context) {
       // 防止点击对话框外部的空白区域时被关闭
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String projectName = "新建项目";
+        String projectName = "新建生意分析";
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0), // 设置圆角
@@ -49,7 +49,7 @@ void showProjectCreateDialog(BuildContext context) {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  StartBusinssPage(projectName: projectName)));
+                                  CreateBusinssPage(projectName: projectName)));
                     },
                     child: const Text('创建'))
               ],
