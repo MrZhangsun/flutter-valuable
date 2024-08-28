@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         ),
         drawer: const Profile(),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(50, 50, 50, 50),
+          padding: const EdgeInsets.fromLTRB(15, 20, 15, 50),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
