@@ -4,6 +4,7 @@ import 'package:valuable/features/list.dart';
 import 'profile.dart';
 import '../services/constants.dart';
 import 'create_dialog.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final _logger = Logger();
 
@@ -37,11 +38,6 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-  // void _push2NewPage() {
-  //   Navigator.push(context,
-  //       MaterialPageRoute(builder: (context) => const StartBusinssPage()));
-  // }
-
   void _push2ListPage(String name) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => Dashboard(name: name)));
@@ -51,64 +47,70 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             'Valuable Your Business!',
             style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 16.sp,
                 color: AppColors.textHead1Color,
                 fontWeight: FontWeight.bold),
           ),
-          titleSpacing: 2.0,
-          iconTheme: const IconThemeData(color: AppColors.iconColor),
+          titleSpacing: ScreenUtil().setWidth(0.01.sw),
+          leadingWidth: 0.1.sw,
+          iconTheme: IconThemeData(
+            color: AppColors.iconColor,
+            size: 16.sp,
+          ),
           actions: [
             IconButton(
-              onPressed: () {
-                _logger.i("app bar search...");
-              },
-              icon: const Icon(Icons.search),
-              color: AppColors.accentColor,
-            ),
+                onPressed: () {
+                  _logger.i("app bar search...");
+                },
+                icon: const Icon(
+                  Icons.search,
+                )),
             IconButton(
                 onPressed: () {
                   _logger.i("app bar more...");
                 },
-                icon: const Icon(
-                  Icons.notifications,
-                  color: AppColors.iconColor,
-                ))
+                icon:
+                    const Icon(Icons.notifications, color: AppColors.iconColor))
           ],
           backgroundColor: AppColors.primaryColor,
+          toolbarHeight: 0.1.sh,
         ),
         drawer: const Profile(),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 20, 15, 50),
+          padding: EdgeInsets.only(left: 0.01.sw),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             verticalDirection: VerticalDirection.down,
             children: [
-              SizedBox(
-                height: 600,
+              Expanded(
+                flex: 9,
                 child: ListView.builder(
                   itemCount: categories.length,
+                  itemExtent: 40.h,
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: Icon(
                         categories[index]['icon'],
                         color: AppColors.iconColor,
+                        size: 16.sp,
                       ),
+                      horizontalTitleGap: 0.02.sw,
                       title: Text(categories[index]['name']),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min, // 确保Row使用最小空间
                         children: [
                           Text(
                             categories[index]['count'].toString(),
-                            style: const TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16.sp),
                           ), // 显示数字
-                          const SizedBox(width: 8), // 设置数字和图标之间的间距
-                          const Icon(
+                          SizedBox(width: 0.02.sw), // 设置数字和图标之间的间距
+                          Icon(
                             Icons.arrow_forward_ios,
-                            size: 16,
+                            size: 16.sp,
                           ), // 显示图标
                         ],
                       ),
@@ -119,28 +121,30 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              TextButton(
-                  onPressed: () {
-                    showProjectCreateDialog(context);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        IconFont.creation,
-                        color: AppColors.iconColor,
-                        size: 22,
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      const Text('新建项目',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.iconColor))
-                    ],
-                  ))
+              Expanded(
+                  flex: 2,
+                  child: TextButton(
+                      onPressed: () {
+                        showProjectCreateDialog(context);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            IconFont.creation,
+                            color: AppColors.iconColor,
+                            size: 22.sp,
+                          ),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          Text('新建项目',
+                              style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.iconColor))
+                        ],
+                      )))
             ],
           ),
         ));
